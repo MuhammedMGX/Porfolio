@@ -1,19 +1,17 @@
 "use client";
 
+import dynamic from 'next/dynamic';
 
-import GlareHover from "@/blocks/Animations/GlareHover/GlareHover";
-import Balatro from "@/blocks/Backgrounds/Balatro/Balatro";
-import DotGrid from "@/blocks/Backgrounds/DotGrid/DotGrid";
-import FaultyTerminal from "@/blocks/Backgrounds/FaultyTerminal/FaultyTerminal";
-import LightRays from "@/blocks/Backgrounds/LightRays/LightRays";
-import RippleGrid from "@/blocks/Backgrounds/RippleGrid/RippleGrid";
-import Squares from "@/blocks/Backgrounds/Squares/Squares";
-import Threads from "@/blocks/Backgrounds/Threads/Threads";
-import GlassSurface from "@/blocks/Components/GlassSurface/GlassSurface";
-import TiltedCard from "@/blocks/Components/TiltedCard/TiltedCard";
-import CurvedLoop from "@/blocks/TextAnimations/CurvedLoop/CurvedLoop";
-import ShinyText from "@/blocks/TextAnimations/ShinyText/ShinyText";
-import SplitText from "@/blocks/TextAnimations/SplitText/SplitText";
+// Replace your existing component imports with these dynamic imports:
+const GlareHover = dynamic(() => import("@/blocks/Animations/GlareHover/GlareHover"), { ssr: false });
+const FaultyTerminal = dynamic(() => import("@/blocks/Backgrounds/FaultyTerminal/FaultyTerminal"), { ssr: false });
+const LightRays = dynamic(() => import("@/blocks/Backgrounds/LightRays/LightRays"), { ssr: false });
+const RippleGrid = dynamic(() => import("@/blocks/Backgrounds/RippleGrid/RippleGrid"), { ssr: false });
+const GlassSurface = dynamic(() => import("@/blocks/Components/GlassSurface/GlassSurface"), { ssr: false });
+const TiltedCard = dynamic(() => import("@/blocks/Components/TiltedCard/TiltedCard"), { ssr: false });
+const CurvedLoop = dynamic(() => import("@/blocks/TextAnimations/CurvedLoop/CurvedLoop"), { ssr: false });
+const SplitText = dynamic(() => import("@/blocks/TextAnimations/SplitText/SplitText"), { ssr: false });
+
 
 import Image from "next/image";
 import { ProjectModal, ShowMyCV } from "./_dialog/page";
