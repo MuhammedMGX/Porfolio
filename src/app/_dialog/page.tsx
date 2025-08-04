@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect, cloneElement, ReactElement, MouseEventHandler, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
