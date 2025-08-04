@@ -1,5 +1,6 @@
 "use client";
 
+
 import GlareHover from "@/blocks/Animations/GlareHover/GlareHover";
 import Balatro from "@/blocks/Backgrounds/Balatro/Balatro";
 import DotGrid from "@/blocks/Backgrounds/DotGrid/DotGrid";
