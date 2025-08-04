@@ -19,7 +19,10 @@ export function ProjectModal({ title, description, screen, demo, github, childre
   const [open, setOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => setIsMounted(true), []);
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -141,7 +144,10 @@ export function ShowMyCV({ children }: ShowMyCVProps) {
   const [open, setOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => setIsMounted(true), []);
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {

@@ -17,11 +17,11 @@ import SplitText from "@/blocks/TextAnimations/SplitText/SplitText";
 import Image from "next/image";
 import { ProjectModal, ShowMyCV } from "./_dialog/page";
 
+
 const handleAnimationComplete = () => {
-  console.log('All letters have animated!');
+  if (typeof window !== 'undefined') {
+  }
 };
-
-
 export default function Home() {
   return (
     <>
