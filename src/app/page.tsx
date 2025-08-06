@@ -151,7 +151,7 @@ export default function Home() {
             playOnce={false}
             className="rounded-xl p-3 px-6 w-35 bg-white/10 backdrop-blur-lg [box-shadow:inset_0_0_10px_2px_rgba(255,255,255,0.3)] border border-white !bg-[rgba(0,0,0,0.7)] hover:scale-[102%] !transtion duration-300"
           >
-          <h2 className="font-bold">Show CV</h2>
+          <h2 className="font-bold">Resume</h2>
           </GlareHover>
           </ShowMyCV>
 
