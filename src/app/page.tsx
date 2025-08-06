@@ -28,7 +28,7 @@ export default function Home() {
 
 
         
-      <div className="h-[70vh] md:h-[120vh] w-full flex items-center justify-center relative">
+      <div className="h-[70vh] md:h-[100vh] w-full flex items-center justify-center relative">
 
 
         <GlassSurface
