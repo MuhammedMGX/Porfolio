@@ -256,7 +256,7 @@ export default function Home() {
             demo="https://streaming-app-five-khaki.vercel.app/"
             github="https://github.com/MuhammedMGX/Netflix-clone"
           >
-        <div className="w-full md:w-1/3 relative group p-2">
+        <div className="w-full md:w-1/3 relative group p-3 hover:z-10">
           <div className="flex gap-x-2 absolute -translate-y-0 opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 transition duration-400">
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Next.JS</span>
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Typescript</span>
@@ -307,7 +307,7 @@ export default function Home() {
             demo="https://freshcart-theta-six.vercel.app/"
             github="https://github.com/MuhammedMGX/FreshCart-React"
           >
-        <div className="w-full md:w-1/3 relative group p-2">
+        <div className="w-full md:w-1/3 relative group p-3 hover:z-10">
           <div className="flex gap-x-2 absolute -translate-y-0 opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 transition duration-400">
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">React.JS</span>
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Javacript</span>
@@ -358,7 +358,7 @@ export default function Home() {
             demo="https://dashboard-nine-blond-19.vercel.app/dashboard"
             github="https://github.com/MuhammedMGX/Dashboard"
           >
-        <div className="w-full md:w-1/3 relative group p-2">
+        <div className="w-full md:w-1/3 relative group p-3 hover:z-10">
           <div className="flex gap-x-2 absolute -translate-y-0 opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 transition duration-400">
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Next.JS</span>
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Typescript</span>
@@ -411,7 +411,7 @@ export default function Home() {
             demo="https://weather-js-gilt.vercel.app/"
             github="https://github.com/MuhammedMGX/Weather-js"
           >
-         <div className="w-full md:w-1/3 relative group p-2">
+         <div className="w-full md:w-1/3 relative group p-3 hover:z-10">
           <div className="flex gap-x-2 absolute -translate-y-0 opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 transition duration-400">
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Javascript</span>
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Html</span>
@@ -462,7 +462,7 @@ export default function Home() {
             demo="https://weather-js-gilt.vercel.app/"
             github="https://github.com/MuhammedMGX/Weather-js"
           >
-        <div className="w-full md:w-1/3 relative group p-2">
+        <div className="w-full md:w-1/3 relative group p-3 hover:z-10">
           <div className="flex gap-x-2 absolute -translate-y-0 opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 transition duration-400">
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Html</span>
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Css</span>
