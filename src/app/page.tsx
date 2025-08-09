@@ -459,8 +459,8 @@ export default function Home() {
               </>
             }  
             screen="/DevFolio2.png"
-            demo="https://weather-js-gilt.vercel.app/"
-            github="https://github.com/MuhammedMGX/Weather-js"
+            demo="https://daniels-profile-css.vercel.app/"
+            github="https://github.com/MuhammedMGX/DevFolio-css"
           >
         <div className="w-full md:w-1/3 relative group p-3 hover:z-10">
           <div className="flex gap-x-2 absolute -translate-y-0 opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 transition duration-400">
