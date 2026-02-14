@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
 // Replace your existing component imports with these dynamic imports:
 const GlareHover = dynamic(() => import("@/blocks/Animations/GlareHover/GlareHover"), { ssr: false });
@@ -14,14 +15,22 @@ const SplitText = dynamic(() => import("@/blocks/TextAnimations/SplitText/SplitT
 
 
 import Image from "next/image";
+import ClientOnly from "./components/ClientOnly";
 import { ProjectModal, ShowMyCV } from "./_dialog/page";
 
 
-const handleAnimationComplete = () => {
-  if (typeof window !== 'undefined') {
-  }
-};
+const handleAnimationComplete = () => {};
+
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
   return (
     <>
 
