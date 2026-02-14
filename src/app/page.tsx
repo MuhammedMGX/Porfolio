@@ -191,7 +191,7 @@ export default function Home() {
 
 
 
-      <div className="relative h-40 md:h-80 lg:h-100 w-full -mt-10 lg:-mt-20 xl:-mt-40  z-20">
+      <div className="relative h-40 md:h-80 lg:h-100 w-full -mt-10 lg:-mt-20 xl:-mt-40  z-20 overflow-x-hidden">
           <div className="pointer-events-none absolute top-[0%] left-[50%] translate-x-[-50%] transform scale-x-180 md:scale-x-420 w-100 lg:w-150 xl:w-200 !h-full  rounded-t-full bg-gradient-to-r from-black via-white to-black z-1"></div>
           <div className="pointer-events-none absolute top-[0.7%] left-[50%] translate-x-[-50%] transform scale-x-180 md:scale-x-420 w-100 lg:w-150 xl:w-200 !h-full  rounded-t-full bg-black z-1"></div>
           <div className="pointer-events-none absolute top-[0.7%] left-[50%] translate-x-[-50%] transform scale-x-180 md:scale-x-420 w-100 lg:w-150 xl:w-200 !h-full  rounded-t-full bg-black  z-2">
