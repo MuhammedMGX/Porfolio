@@ -21,7 +21,6 @@ export default function Preloader() {
   }, [isLoading]);
 
 
-
   return (
     <AnimatePresence
         onExitComplete={() => {
@@ -31,32 +30,32 @@ export default function Preloader() {
 
       {isLoading && (
         <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black"
           initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
             transition: {
               duration: 1,
-              ease: "easeInOut",
+              ease: "easeOut",
             },
           }}
         >
           <motion.div
-            initial={{
-              opacity: 0.2,
-              scale: 0.8,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-            }}
-            transition={{
-              duration: 3,
-              ease: "easeOut",
-            }}
+            initial={{ opacity: 0.2, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            style={{ willChange: "transform, opacity" }}
           >
-            <Image src={logo} alt={"logo"} className="w-[20%] mx-auto"/>
+            <Image
+              src={logo}
+              alt="logo"
+              width={100}
+              height={100}
+              className=" mx-auto h-auto"
+              priority
+            />
           </motion.div>
+
         </motion.div>
       )}
     </AnimatePresence>
