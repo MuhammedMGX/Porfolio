@@ -179,9 +179,34 @@ html.preloader-active {
   overflow: hidden;
 }
 
-
-
-
 body {
  @apply overflow-x-hidden;
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  opacity: 1;
+  transition: opacity 0.6s ease-out;
+}
+
+.preloader-exit {
+  opacity: 0;
+}
+
+.preloader-logo {
+  transform: scale(0.8) translateZ(0);
+  opacity: 0.2;
+  animation: logo-pop 1.2s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes logo-pop {
+  from { transform: scale(0.8) translateZ(0); opacity: 0.2; }
+  to   { transform: scale(1)   translateZ(0); opacity: 1;   }
 }

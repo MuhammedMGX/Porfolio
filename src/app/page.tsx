@@ -14,8 +14,6 @@ const CurvedLoop = dynamic(() => import("@/blocks/TextAnimations/CurvedLoop/Curv
 const SplitText = dynamic(() => import("@/blocks/TextAnimations/SplitText/SplitText"), { ssr: false });
 
 
-import Image from "next/image";
-import ClientOnly from "./components/ClientOnly";
 import { ProjectModal, ShowMyCV } from "./_dialog/page";
 import Threads from '@/blocks/Backgrounds/Threads/Threads';
 
@@ -39,14 +37,6 @@ function useIsDesktop() {
 
 export default function Home() {
   const isDesktop = useIsDesktop()
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-  const timer = setTimeout(() => {
-    setIsLoading(false);
-  }, 1000);
-
-  return () => clearTimeout(timer);
-}, []);
 
 
   return (
@@ -97,7 +87,7 @@ export default function Home() {
           </GlassSurface>
         )}
 
-{!isLoading && (<FaultyTerminal
+        <FaultyTerminal
           scale={1.5}
           digitSize={1.2}
           scanlineIntensity={0.5}
@@ -111,7 +101,7 @@ export default function Home() {
           mouseReact
           mouseStrength={0.5}
           brightness={1}
-        /> )}
+        /> 
         
 
 
