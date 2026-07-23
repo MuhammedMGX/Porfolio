@@ -75,7 +75,7 @@ export function ProjectModal({ title, description, screen, demo, github, childre
               >
                 <div className="flex justify-end sticky top-0 -mr-5">
                   <button
-                    className="text-gray-600 hover:text-black text-2xl"
+                    className="text-white hover:text-gray-200 text-2xl"
                     onClick={() => setOpen(false)}
                   >
                     &times;
@@ -130,7 +130,7 @@ export function ProjectModal({ title, description, screen, demo, github, childre
                 <div className="w-[80%] h-1 bg-white rounded-full"></div>
 
                 <div className="text-white py-10">
-                  <p>{description}</p>
+                  {description}
                 </div>
 
                 <div className="pb-10">
@@ -203,15 +203,15 @@ export function ShowMyCV({ children }: ShowMyCVProps) {
               onClick={() => setOpen(false)}
             >
               <motion.div
-                className="bg-[#0A0A0A] rounded-lg shadow-lg aspect-[8.5/11] p-6 relative h-screen  md:px-10 modal-content"
+                className="bg-[#0A0A0A] rounded-lg shadow-lg aspect-[8.5/11] p-6 relative h-[90vh] w-full sm:w-auto  md:px-10 modal-content "
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="flex justify-end sticky top-0 -mr-5">
+                <div className="flex justify-end sticky top-0 -mr-5 w-full" >
                   <button
-                    className="text-gray-600 hover:text-black text-2xl"
+                    className="text-white hover:text-gray-200 text-2xl"
                     onClick={() => setOpen(false)}
                   >
                     &times;
@@ -226,7 +226,7 @@ export function ShowMyCV({ children }: ShowMyCVProps) {
 
                 <div className="w-[80%] h-1 bg-white rounded-full"></div>
 
-                <div className="pb-10">
+                <div className="py-10">
                   <iframe
                     src="https://drive.google.com/file/d/124eEEP5Y7zao7EZyA5oTFTbx6aW5Bepb/preview"
                     width="100%"

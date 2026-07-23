@@ -50,12 +50,13 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
   const dirRef = useRef<"left" | "right">(direction);
   const velRef = useRef(0);
 
-  const textLength = spacing;
-  const totalText = textLength
-    ? Array(Math.ceil(1800 / textLength) + 2)
-        .fill(text)
-        .join("")
-    : text;
+  // 
+ const textLength = spacing;
+const repeatCount = textLength
+  ? Math.ceil(1800 / textLength) + 3
+  : 1;
+
+const totalText = text.repeat(repeatCount);
   const ready = spacing > 0;
 
   useEffect(() => {

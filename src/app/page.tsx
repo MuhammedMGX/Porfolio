@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Replace your existing component imports with these dynamic imports:
 const GlareHover = dynamic(() => import("@/blocks/Animations/GlareHover/GlareHover"), { ssr: false });
@@ -17,105 +17,109 @@ const SplitText = dynamic(() => import("@/blocks/TextAnimations/SplitText/SplitT
 import Image from "next/image";
 import ClientOnly from "./components/ClientOnly";
 import { ProjectModal, ShowMyCV } from "./_dialog/page";
+import Threads from '@/blocks/Backgrounds/Threads/Threads';
 
 
 const handleAnimationComplete = () => {};
 
-export default function Home() {
-  const [isMounted, setIsMounted] = useState(false);
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false)
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    const mq = window.matchMedia("(min-width: 768px)")
+    setIsDesktop(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [])
+  return isDesktop
+}
 
-  if (!isMounted) {
-    return null;
-  }
+
+
+export default function Home() {
+  const isDesktop = useIsDesktop()
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setIsLoading(false);
+  }, 1000);
+
+  return () => clearTimeout(timer);
+}, []);
+
+
   return (
     <>
 
 
 
-        
-      <div className="h-[70vh] md:h-[100vh] w-full flex items-center justify-center relative">
+    {/* Hero */}
+      <div className="h-[110vh] w-full flex items-center justify-center relative">
 
+        {isDesktop ? (
+          <GlassSurface
+            className="!absolute !w-[70%] z-10 top-6 left-1/2 -translate-x-[50%] px-6"
+            height={60}
+            displace={15}
+            distortionScale={-150}
+            redOffset={5}
+            greenOffset={15}
+            blueOffset={25}
+            brightness={60}
+            opacity={0.7}
+            mixBlendMode="screen"
+          >
+            <div className="w-full flex items-center justify-between text-white">
+              <span className="font-bold text-xl">Portfolio</span>
+              <div>
+                <a href="#project"><span className="font-bold text-lg me-5 cursor-pointer">Projects</span></a>
+                <a href="#contact"><span className="font-bold text-lg cursor-pointer">Contact</span></a>
+              </div>
+            </div>
+          </GlassSurface>
+        ) : (
+          <GlassSurface
+            className="!absolute !w-[70%] z-10 top-6 left-1/2 -translate-x-[50%] px-6"
+            height={60}
+            displace={15}
+            distortionScale={-150}
+            redOffset={5}
+            greenOffset={15}
+            blueOffset={25}
+            brightness={60}
+            opacity={0.7}
+            mixBlendMode="screen"
+          >
+            <div className="w-full flex items-center justify-center text-white">
+              <span className="font-bold text-xl">Muhammed Portfolio</span>
+            </div>
+          </GlassSurface>
+        )}
 
-        <GlassSurface
-          className="!absolute !w-[70%] z-10 top-6 left-1/2 -translate-x-[50%] px-6 hidden md:flex"
-          height={60}
-          displace={15}
-          distortionScale={-150}
-          redOffset={5}
-          greenOffset={15}
-          blueOffset={25}
-          brightness={60}
-          opacity={0.7}
-          mixBlendMode="screen"
-        >
-
-          <div className="w-full flex items-center justify-between text-white">
-
-          <span className="font-bold text-xl">Portfolio</span>
-          <div>
-            <a href="#project"><span className="font-bold text-lg me-5 cursor-pointer">Projects</span></a>
-            <a href="#contact"><span className="font-bold text-lg cursor-pointer">Contact</span></a>
-          </div>
-
-          </div>
-
-        </GlassSurface>
-
-
-        <GlassSurface
-          className="!absolute !w-[70%] z-10 top-6 left-1/2 -translate-x-[50%] px-6 flex md:hidden"
-          height={60}
-          displace={15}
-          distortionScale={-150}
-          redOffset={5}
-          greenOffset={15}
-          blueOffset={25}
-          brightness={60}
-          opacity={0.7}
-          mixBlendMode="screen"
-        >
-
-          <div className="w-full flex items-center justify-center text-white">
-
-          <span className="font-bold text-xl">Muhammed Portfolio</span>
-
-
-          </div>
-
-        </GlassSurface>
-
-
-        <FaultyTerminal
-          scale={2}
-          gridMul={[2, 1]}
+{!isLoading && (<FaultyTerminal
+          scale={1.5}
           digitSize={1.2}
-          timeScale={0.2}
-          pause={false}
-          scanlineIntensity={1}
+          scanlineIntensity={0.5}
           glitchAmount={1}
           flickerAmount={1}
           noiseAmp={1}
           chromaticAberration={0}
           dither={0}
-          curvature={0}
+          curvature={0.08}
           tint="#424242"
-          mouseReact={true}
+          mouseReact
           mouseStrength={0.5}
-          pageLoadAnimation={false}
           brightness={1}
-        />
+        /> )}
+        
 
 
         <div className="absolute top-1/2 w-full  text-white transform -translate-y-1/2 p-8 rounded-lg shadow-lg drop-shadow-xl flex flex-col items-center justify-center">
 
-
         <SplitText
           text="Hi, I'm Muhammed Gharib"
-          className="md:text-6xl font-semibold text-center"
+          className="text-3xl md:text-6xl font-semibold whitespace-nowrap"
           delay={100}
           duration={0.6}
           ease="power3.out"
@@ -127,7 +131,6 @@ export default function Home() {
           textAlign="center"
           onLetterAnimationComplete={handleAnimationComplete}
         />
-
         <SplitText
           text="Frontend Developer"
           className="md:text-4xl font-semibold text-center mt-2"
@@ -146,8 +149,6 @@ export default function Home() {
 
 
         <div className="mx-auto flex items-center  pt-10">
-
-
           <ShowMyCV>
           <GlareHover
             width={"200"}
@@ -191,38 +192,25 @@ export default function Home() {
 
 
 
-      <div className="relative h-40 md:h-80 lg:h-100 w-full -mt-10 lg:-mt-20 xl:-mt-40  z-20 overflow-hidden">
-          <div className="pointer-events-none absolute top-[0%] left-[50%] translate-x-[-50%] transform scale-x-180 md:scale-x-420 w-100 lg:w-150 xl:w-200 !h-full  rounded-t-full bg-gradient-to-r from-black via-white to-black z-1"></div>
-          <div className="pointer-events-none absolute top-[0.7%] left-[50%] translate-x-[-50%] transform scale-x-180 md:scale-x-420 w-100 lg:w-150 xl:w-200 !h-full  rounded-t-full bg-black z-1"></div>
-          <div className="pointer-events-none absolute top-[0.7%] left-[50%] translate-x-[-50%] transform scale-x-180 md:scale-x-420 w-100 lg:w-150 xl:w-200 !h-full  rounded-t-full bg-black  z-2">
-              <LightRays
-                raysOrigin="top-center"
-                raysColor="#ffffff"
-                raysSpeed={1.5}
-                lightSpread={0.8}
-                rayLength={0.7}
-                followMouse={true}
-                mouseInfluence={0.1}
-                noiseAmount={0.1}
-                distortion={0.05}
-                className="rounded-t-full"
-              />
-          </div>
+    {/* technologies */}
+ <div className="relative h-30 md:h-70 -mt-10">
 
+<div className="relative  w-ful h-20 rounded-t-[200%]    bg-gradient-to-r from-muted/1 via-white to-muted/1">
+    <div className="absolute top-1 w-full h-20 rounded-t-[200%] bg-black overflow-visible"></div>
+    <div className="pointer-events-none absolute top-0 left-[50%] translate-x-[-50%] transform scale-x-210 w-80 h-50 md:scale-x-420 md:w-100 md:h-100  rounded-full bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.2),_transparent_18%)] z-2"></div>
+</div>
 
-          <div className="absolute top-[10%] lg:top-[20%] lg:top-[20%] 2xl:top-[50%] left-[54%] translate-x-[-50%] transform  w-full !h-full  rounded-t-full z-2">
-            <CurvedLoop
-                      marqueeText="✦ React.JS ✦ Next.JS ✦ Javascript ✦ Typescript ✦ Tailwind ✦ Bootstrap ✦ Redux ✦ Jquery ✦ HTML5 ✦ CSS ✦ Git ✦ GitHub ✦ shadcn ✦ NextAuth.js "
-                      speed={1}
-                      curveAmount={-250}
-                      direction="right"
-                      interactive={true}
-                      className="text-6xl"
-                    />
-          </div>
-          
-
-        </div>
+    <div className='absolute top-20 md:top-40 w-full'>
+          <CurvedLoop
+              marqueeText="✦ React.JS ✦ Next.JS ✦ Javascript ✦ Typescript ✦ Tailwind ✦ Bootstrap ✦ Redux ✦ Jquery ✦ HTML5 ✦ CSS ✦ Git ✦ GitHub ✦ shadcn ✦ NextAuth.js "
+              speed={1}
+              curveAmount={-170}
+              direction="left"
+              interactive={true}
+              className=" text-6xl  "
+            />
+    </div>
+</div>
 
 
 
@@ -230,15 +218,8 @@ export default function Home() {
 
 
 
-
-
-
-
-
-
-
-
-      <div id="project" className="relative w-full bg-black -mt-20 text-white pt-20">
+    {/* projects */}  
+      <div id="project" className="relative w-full bg-black text-white pt-20 ">
         <h2 className="text-center font-bold text-4xl">PROJECTS</h2>
 
 
@@ -299,34 +280,37 @@ export default function Home() {
 
 
           <ProjectModal
-            title="E commerce"
+            title="Cartify"
             description=  {
               <>
                 <ul className="list-disc pl-5 space-y-2">
-                  <li>Designed and developed a fully functional e-commerce platform with React.js, Tailwind CSS, and Redux.</li>
-                  <li>Implemented user authentication (login, registration, password reset) using Formik and Yup.</li>
-                  <li>Built a dynamic shopping cart and multi-step checkout process, integrating payment gateways via Axios.</li>
-                  <li>Optimized responsive design for mobile and desktop using CSS Flexbox and Grid, improving usability across devices.</li>
-                  <li>Managed state with Redux and Context API, fetching product data from RESTful APIs.</li>
-                  <li>More features like User profile, Wishlist, Related products, Settings, Search, Order history, User Addresses.</li>
+                  <li>Built a full-featured e-commerce SPA with React 19, TypeScript, and Vite, using a feature-based architecture for scalability</li>
+                  <li>Implemented JWT authentication with protected/public route guards, including login, registration, and a full forgot-password flow (email → verification code → reset)</li>
+                  <li>Designed a responsive UI system with shadcn/ui and Tailwind CSS v4, including a custom animated dark/light theme toggle using the View Transitions API</li>
+                  <li>Built product browsing with dynamic search, category/brand filtering, and sorting, backed by TanStack Query for caching and request deduplication</li>
+                  <li>Developed a shopping cart and wishlist system with Redux Toolkit, syncing real-time quantity updates, coupon application, and persisted state to a REST API</li>
+                  <li>Created a account dashboard with a collapsible sidebar, breadcrumb navigation, order history, address management, and password/profile settings</li>
+                  <li>Implemented a product reviews system (create, edit, delete) with optimistic UI feedback and star-rating input</li>
+                  <li>Optimized performance with route-based code splitting and image loading priorities, achieving a 99 Lighthouse performance score</li>
+                  <li>Handled form validation across the app using React Hook Form and Zod schemas</li>
                 </ul>
               </>
             }  
-            screen="/cart2.png"
-            demo="https://freshcart-theta-six.vercel.app/"
-            github="https://github.com/MuhammedMGX/FreshCart-React"
+            screen="/cartify2.png"
+            demo="https://cartify-seven-liart.vercel.app/"
+            github="https://github.com/MuhammedMGX/Cartify.git"
           >
         <div className="w-full md:w-1/3 relative group p-3 hover:z-10">
           <div className="flex gap-x-2 absolute -translate-y-0 opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 transition duration-400">
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">React.JS</span>
-            <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Javacript</span>
+            <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Typescript</span>
             <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Tailwind Css</span>
           </div>
           <div className="aspect-video relative">
             <TiltedCard
-              imageSrc="/cart1.png"
-              altText="E commerce"
-              captionText="E commerce"
+              imageSrc="/cartify1.png"
+              altText="Cartify"
+              captionText="Cartify"
               containerHeight="100%"
               containerWidth="100%"
               imageHeight="100%"
@@ -338,7 +322,7 @@ export default function Home() {
               displayOverlayContent={true}
               overlayContent={
                 <div className="text-nowrap relative w-full h-full flex">
-                    <span className="absolute top-5 left-5 bg-[rgba(0,0,0,0.5)] p-2 px-3 font-bold text-xs rounded-lg">E commerce</span>
+                    <span className="absolute top-5 left-5 bg-[rgba(0,0,0,0.5)] p-2 px-3 font-bold text-xs rounded-lg">Cartify</span>
                 </div>
               }
             />
@@ -390,6 +374,59 @@ export default function Home() {
               overlayContent={
                 <div className="text-nowrap relative w-full h-full flex">
                     <span className="absolute top-5 left-5 bg-[rgba(0,0,0,0.5)] p-2 px-3 font-bold text-xs rounded-lg">Dashboard</span>
+                </div>
+              }
+            />
+          </div>
+        </div>
+        </ProjectModal>
+
+
+
+
+
+
+        <ProjectModal
+            title="E commerce"
+            description=  {
+              <>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Designed and developed a fully functional e-commerce platform with React.js, Tailwind CSS, and Redux.</li>
+                  <li>Implemented user authentication (login, registration, password reset) using Formik and Yup.</li>
+                  <li>Built a dynamic shopping cart and multi-step checkout process, integrating payment gateways via Axios.</li>
+                  <li>Optimized responsive design for mobile and desktop using CSS Flexbox and Grid, improving usability across devices.</li>
+                  <li>Managed state with Redux and Context API, fetching product data from RESTful APIs.</li>
+                  <li>More features like User profile, Wishlist, Related products, Settings, Search, Order history, User Addresses.</li>
+                </ul>
+              </>
+            }  
+            screen="/cart2.png"
+            demo="https://freshcart-theta-six.vercel.app/"
+            github="https://github.com/MuhammedMGX/FreshCart-React"
+          >
+        <div className="w-full md:w-1/3 relative group p-3 hover:z-10">
+          <div className="flex gap-x-2 absolute -translate-y-0 opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 transition duration-400">
+            <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">React.JS</span>
+            <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Javacript</span>
+            <span className="text-xs border p-1 rounded-lg font-bold px-2 bg-black">Tailwind Css</span>
+          </div>
+          <div className="aspect-video relative">
+            <TiltedCard
+              imageSrc="/cart1.png"
+              altText="E commerce"
+              captionText="E commerce"
+              containerHeight="100%"
+              containerWidth="100%"
+              imageHeight="100%"
+              imageWidth="100%"
+              rotateAmplitude={12}
+              scaleOnHover={1.1}
+              showMobileWarning={false}
+              showTooltip={true}
+              displayOverlayContent={true}
+              overlayContent={
+                <div className="text-nowrap relative w-full h-full flex">
+                    <span className="absolute top-5 left-5 bg-[rgba(0,0,0,0.5)] p-2 px-3 font-bold text-xs rounded-lg">E commerce</span>
                 </div>
               }
             />
@@ -515,48 +552,41 @@ export default function Home() {
 
 
 
-
-<div id="contact" className="w-full relative h-[700px] bg-black flex items-center overflow-hidden">
+{/* contact */} 
+<div id="contact" className="w-full relative h-[700px] bg-black flex mt-10 items-center overflow-hidden">
         
 
-<div className="scale-[530%] mx-auto">
-  <RippleGrid
-    enableRainbow={false}
-    gridColor="#ffffff"
-    rippleIntensity={0.05}
-    gridSize={10}
-    fadeDistance={2}
-    gridThickness={15}
-    mouseInteraction={true}
-    mouseInteractionRadius={1.2}
-    opacity={0.8}
-  />
+<div className="w-full h-full">
+    <Threads
+      color={[1, 1, 1]}
+      amplitude={1}
+      distance={0}
+      enableMouseInteraction
+    />  
 </div>
-
-
 
   <div className="absolute h-full w-full flex flex-col items-center justify-center text-white -mt-20">
 
-        <h2 className="text-center font-bold text-4xl py-10 text-white">CONTACT ME</h2>
+        <h2 className="text-center font-bold text-4xl py-5 text-white">CONTACT ME</h2>
 
-        <form action="https://formspree.io/f/xjkoabvp" method="POST" className="gap-y-4 flex flex-col md:w-1/2 mx-auto bg-black bg-[#171717] p-10 rounded-2xl shadow-xl">
+        <form action="https://formspree.io/f/xjkoabvp" method="POST" className="gap-y-4 flex flex-col w-full md:w-1/2 mx-auto bg-black bg-transparent p-10 rounded-2xl shadow-xl">
 
         <div className="flex flex-col ">
           <label htmlFor="name" className="text-sm py-1">Name</label>
-          <input className="border rounded-lg p-2 border-[#424242]" type="text" name="name" placeholder="Your Name" required />
+          <input id="name" className="border rounded-lg p-2 border-[#424242] bg-[#171717]/90" type="text" name="name" placeholder="Your Name" required />
         </div>
 
         <div className="flex flex-col ">
-          <label htmlFor="name" className="text-sm py-1">Email</label>
-          <input className="border rounded-lg p-2 border-[#424242]" type="email" name="email" placeholder="Your Email" required />
+          <label htmlFor="email" className="text-sm py-1">Email</label>
+          <input id="email" className="border rounded-lg p-2 border-[#424242] bg-[#171717]/90" type="email" name="email" placeholder="Your Email" required />
         </div>
 
         <div className="flex flex-col ">
-          <label htmlFor="name" className="text-sm py-1">Message</label>
-          <textarea className="border rounded-lg p-2 border-[#424242]" name="message" placeholder="Your Message" required></textarea>
+          <label htmlFor="message" className="text-sm py-1">Message</label>
+          <textarea id="message" className="border rounded-lg p-2 border-[#424242] bg-[#171717]/90" name="message" placeholder="Your Message" required></textarea>
         </div>
 
-          <button className="bg-white text-black rounded-lg py-1 font-medium my-5 cursor-pointer" type="submit">Send Message</button>
+          <button className="bg-white/90 text-black rounded-lg py-1 font-medium my-5 cursor-pointer" type="submit">Send Message</button>
         </form>
 
 
@@ -574,7 +604,7 @@ export default function Home() {
 
 
 
-
+{/* footer */} 
   <div className="pb-10 md:px-20 px-10 flex flex-wrap bg-black  text-white">
 
     <div className="md:flex-row flex-col flex flex-wrap w-full md:items-center items-start justify-between py-5">
